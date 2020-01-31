@@ -1,7 +1,7 @@
 # Личный проект «Типотека» [![Build status][travis-image]][travis-url]
 
 * Студент: [Павел Петров](https://up.htmlacademy.ru/nodejs/3/user/292337).
-* Наставник: `Неизвестно`.
+* Наставник: [Вадим Шевяков](https://up.htmlacademy.ru/nodejs/3/user/574589).
 
 ---
 
