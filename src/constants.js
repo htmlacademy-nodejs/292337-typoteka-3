@@ -1,7 +1,7 @@
 'use strict';
 
 const DEFAULT_COUNT = 1;
-const MAX_COUNTS = 1000;
+const MAX_COUNT = 1000;
 const DEFAULT_COMMAND = `--help`;
 const USER_ARGV_INDEX = 2;
 const ExitCode = {
@@ -11,7 +11,7 @@ const ExitCode = {
 
 module.exports = {
   DEFAULT_COUNT,
-  MAX_COUNTS,
+  MAX_COUNT,
   DEFAULT_COMMAND,
   USER_ARGV_INDEX,
   ExitCode,

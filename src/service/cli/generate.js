@@ -4,7 +4,9 @@ const fs = require(`fs`);
 const {DateTime} = require(`luxon`);
 
 const {
-  DEFAULT_COUNT
+  DEFAULT_COUNT,
+  MAX_COUNT,
+  ExitCode,
 } = require(`../../constants`);
 const {
   getRandomInt,
@@ -94,7 +96,7 @@ const saveToMock = (content) => {
       return console.error(`Can't write data to file...`);
     }
 
-    return console.info(`OOperation success. File created.`);
+    return console.info(`Operation success. File created.`);
   });
 };
 
@@ -103,8 +105,17 @@ module.exports = {
   run(args) {
     const [count] = args;
     const countItem = Number.parseInt(count, 10) || DEFAULT_COUNT;
+
+    if (countItem > MAX_COUNT) {
+      console.error(`Не больше 1000 публикаций`);
+
+      return ExitCode.error;
+    }
+
     const content = JSON.stringify(generateItems(countItem));
 
     saveToMock(content);
+
+    return ExitCode.success;
   }
 };
