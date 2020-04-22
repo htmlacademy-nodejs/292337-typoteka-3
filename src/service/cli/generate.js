@@ -103,7 +103,7 @@ module.exports = {
   run(args) {
     const [count] = args;
     const countItem = Number.parseInt(count, 10) || DEFAULT_COUNT;
-    const content = generateItems(countItem);
+    const content = JSON.stringify(generateItems(countItem));
 
     saveToMock(content);
   }
