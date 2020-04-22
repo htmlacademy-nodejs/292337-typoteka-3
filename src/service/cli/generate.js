@@ -91,7 +91,7 @@ const generateItems = (count) => {
 };
 
 const saveToMock = (content) => {
-  fs.writeFile(`mocks.json`, content, (err) => {
+  fs.writeFile(`mock.json`, content, (err) => {
     if (err) {
       return console.error(`Can't write data to file...`);
     }
