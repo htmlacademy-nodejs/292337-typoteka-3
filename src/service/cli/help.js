@@ -11,8 +11,6 @@ const HELP_MESSAGE =
   --help:               печатает этот текст
   --generate <count>    формирует файл mocks.json`;
 
-console.info(HELP_MESSAGE);
-
 module.exports = {
   name: `--help`,
   run() {
