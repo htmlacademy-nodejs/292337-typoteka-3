@@ -2,6 +2,7 @@
 
 const fs = require(`fs`);
 const {DateTime} = require(`luxon`);
+const chalk = require(`chalk`);
 
 const {
   DEFAULT_COUNT,
@@ -93,10 +94,14 @@ const generateItems = (count) => {
 const saveToMock = (content) => {
   fs.writeFile(`mock.json`, content, (err) => {
     if (err) {
-      return console.error(`Can't write data to file...`);
+      return console.error(
+          chalk.red(`Can't write data to file...`)
+      );
     }
 
-    return console.info(`Operation success. File created.`);
+    return console.info(
+        chalk.green(`Operation success. File created.`)
+    );
   });
 };
 
@@ -107,7 +112,9 @@ module.exports = {
     const countItem = Number.parseInt(count, 10) || DEFAULT_COUNT;
 
     if (countItem > MAX_COUNT) {
-      console.error(`Не больше 1000 публикаций`);
+      console.error(
+          chalk.red(`Не больше 1000 публикаций`)
+      );
 
       return ExitCode.error;
     }
