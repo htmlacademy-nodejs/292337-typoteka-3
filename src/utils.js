@@ -9,9 +9,9 @@ const getRandomInt = (min, max) => {
 
 const shuffle = (someArray) => {
   for (let i = someArray.length - 1; i > 0; i--) {
-    const randmPosition = Math.floor(Math.random() * i);
+    const randomPosition = Math.floor(Math.random() * i);
 
-    [someArray[i], someArray[randmPosition]] = [someArray[randmPosition], someArray[i]];
+    [someArray[i], someArray[randomPosition]] = [someArray[randomPosition], someArray[i]];
   }
 
   return someArray;
