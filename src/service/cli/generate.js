@@ -1,6 +1,6 @@
 'use strict';
 
-const fs = require(`fs`);
+const fs = require(`fs`).promises;
 const {DateTime} = require(`luxon`);
 const chalk = require(`chalk`);
 
@@ -91,18 +91,18 @@ const generateItems = (count) => {
   }));
 };
 
-const saveToMock = (content) => {
-  fs.writeFile(`mock.json`, content, (err) => {
-    if (err) {
-      return console.error(
-          chalk.red(`Can't write data to file...`)
-      );
-    }
+const saveToMock = async (content) => {
+  try {
+    await fs.writeFile(`mock.json`, content);
 
-    return console.info(
+    console.info(
         chalk.green(`Operation success. File created.`)
     );
-  });
+  } catch (error) {
+    console.error(
+        chalk.red(`Can't write data to file...`)
+    );
+  }
 };
 
 module.exports = {
