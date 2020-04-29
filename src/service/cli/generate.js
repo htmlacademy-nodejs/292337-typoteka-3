@@ -1,7 +1,8 @@
 'use strict';
 
-const fs = require(`fs`);
+const fs = require(`fs`).promises;
 const {DateTime} = require(`luxon`);
+const chalk = require(`chalk`);
 
 const {
   DEFAULT_COUNT,
@@ -90,14 +91,18 @@ const generateItems = (count) => {
   }));
 };
 
-const saveToMock = (content) => {
-  fs.writeFile(`mock.json`, content, (err) => {
-    if (err) {
-      return console.error(`Can't write data to file...`);
-    }
+const saveToMock = async (content) => {
+  try {
+    await fs.writeFile(`mock.json`, content);
 
-    return console.info(`Operation success. File created.`);
-  });
+    console.info(
+        chalk.green(`Operation success. File created.`)
+    );
+  } catch (error) {
+    console.error(
+        chalk.red(`Can't write data to file...`)
+    );
+  }
 };
 
 module.exports = {
@@ -107,7 +112,9 @@ module.exports = {
     const countItem = Number.parseInt(count, 10) || DEFAULT_COUNT;
 
     if (countItem > MAX_COUNT) {
-      console.error(`Не больше 1000 публикаций`);
+      console.error(
+          chalk.red(`Не больше 1000 публикаций`)
+      );
 
       return ExitCode.error;
     }
