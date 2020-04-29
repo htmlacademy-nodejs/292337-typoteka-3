@@ -15,9 +15,9 @@ const {
 } = require(`../../utils`);
 
 const FILE_MOCK_PATH = `./mock.json`;
-const FILE_TITLES_PATH = `./src/data/titles.txt`;
-const FILE_SENTENCES_PATH = `./src/data/sentences.txt`;
-const FILE_CATEGORIES_PATH = `./src/data/categories.txt`;
+const FILE_TITLES_PATH = `./data/titles.txt`;
+const FILE_SENTENCES_PATH = `./data/sentences.txt`;
+const FILE_CATEGORIES_PATH = `./data/categories.txt`;
 
 const getItemTitle = (titles) => {
   return titles[getRandomInt(0, titles.length - 1)];
