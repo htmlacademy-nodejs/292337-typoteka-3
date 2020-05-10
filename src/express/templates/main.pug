@@ -5,9 +5,21 @@ block content
     h1.visually-hidden Главная страница личного блога Типотека
     p Это приветственный текст, который владелец блога может выбрать, чтобы описать себя 👏
 
+    //- Если нет материалов, вывести вместо всего
+        .main-page__empty-wrapper
+          p.main-page__empty-text Здесь пока пусто!
+
     section.main-page__theme-list
       include partials/themes.pug
 
+    //- Если нет обсуждаемых материалов,
+        .main-page__section-flex заменить на
+          .main-page__section-flex.main-page__section-flex--short
+            section.main-page__hot.hot
+              h2.hot__name.hot__name--empty
+                | Самое обсуждаемое
+                span.hot__icon.hot__icon--fire
+              p.hot__empty Здесь пока ничего нет...
     .main-page__section-flex
       section.main-page__hot.hot
         h2.hot__name
@@ -36,6 +48,8 @@ block content
         h2.last__name
           | Последние комментарии
           span.last__icon.last__icon--cloud
+        //- Если комментариев нет, заменитьul.last__list на
+            p.last__empty Здесь пока ничего нет...
         ul.last__list
           li.last__list-item
             img.last__list-image(src='img/avatar-small-1.png' width='20' height='20' alt='Аватар пользователя')
@@ -49,6 +63,7 @@ block content
             img.last__list-image(src='img/avatar-small-3.png' width='20' height='20' alt='Аватар пользователя')
             b.last__list-name Игорь Шманский
             a.last__list-link(href='#') Что-то все электрокары в последнее время все на одно лицо делаются))
+
     section.main-page__list.preview
       h2.visually-hidden Список превью статей
       ul.preview__list
@@ -115,7 +130,25 @@ block content
             |
             b.preview__comment-count 12
 
+      //- Пагинация только в режиме админа?
+      .preview__toggle-wrapper
+        ul.preview__pagination.pagination
+          li
+            a.pagination__button.button.button--backwards.button--disabled(href='#' aria-label='Страница назад') Назад
+          li.pagination__item.pagination__item--active
+            a(href='#') 1
+          li.pagination__item
+            a(href='#') 2
+          li.pagination__item
+            a(href='#') 3
+          li.pagination__item
+            a(href='#') 4
+          li.pagination__item
+            a(href='#') 5
+          li
+            a.pagination__button.button.button--forward(href='#' aria-label='Страница вперед') Вперед
+
 block scripts
   //
     <script src="/js/vendor.js"></script>
-        <script src="/js/main.js"></script>
+    <script src="/js/main.js"></script>
