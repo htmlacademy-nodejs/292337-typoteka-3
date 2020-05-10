@@ -41,7 +41,7 @@ app.use((req, res) => res
 
 const createServer = (port) => {
   app.listen(port, () => console.log(
-      chalk.green(`Сервер стартовал на http://locahost:${port}`)
+      chalk.green(`Сервер стартовал на http://localhost:${port}`)
   ));
 };
 
