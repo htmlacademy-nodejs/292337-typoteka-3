@@ -1,3 +1,5 @@
+include mixins/header-nav
+
 doctype html
 html(lang="ru")
   head
@@ -10,7 +12,7 @@ html(lang="ru")
     link(rel='preload' href='/fonts/SFProDisplay-Regular.woff2' as='font' crossorigin='anonymous')
     link(rel='stylesheet' href='/css/style.min.css')
   body
-    .wrapper
+    .wrapper(class=`${userRole === `admin` ? 'wrapper--nobackground' : ``}`)
       include partials/header.pug
 
       block content
