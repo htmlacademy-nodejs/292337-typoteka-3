@@ -1,0 +1,11 @@
+header.header
+  a.header__logo.logo(href='/')
+    img.logo__image(src='/img/icons/logo-image-only.svg' alt='логотип Тайпотеки')
+    span.logo__name Типотека
+
+  if (userState === `logged-in` && userRole === `admin`)
+    include admin-pager.pug
+  else
+    +header-nav(userState, userName, userAvatar)
+
+  a.header__search.button.button--search(href='/search' aria-label='поиск по сайту')
