@@ -15,6 +15,7 @@ const HttpCode = {
   NOT_FOUND: 404,
   INTERNAL_SERVER_ERROR: 500,
 };
+const MAX_ID_LENGTH = 6;
 
 module.exports = {
   DEFAULT_COUNT,
@@ -23,4 +24,5 @@ module.exports = {
   USER_ARGV_INDEX,
   ExitCode,
   HttpCode,
+  MAX_ID_LENGTH,
 };
