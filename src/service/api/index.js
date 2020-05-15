@@ -5,6 +5,7 @@ const {Router} = require(`express`);
 const {
   CategorySevice,
   ArticleSevice,
+  CommentSevice,
 } = require(`../data-service`);
 
 const categoryAPI = require(`./category`);
@@ -18,7 +19,7 @@ const router = new Router();
   const mockData = await getMockData();
 
   categoryAPI(router, new CategorySevice(mockData));
-  articleAPI(router, new ArticleSevice(mockData));
+  articleAPI(router, new ArticleSevice(mockData), new CommentSevice());
 })();
 
 module.exports = router;
