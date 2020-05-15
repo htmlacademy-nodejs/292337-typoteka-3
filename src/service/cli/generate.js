@@ -50,6 +50,7 @@ const generateCommnents = (count, comments) => {
 
 const generateItems = (count, titles, categories, sentences, comments) => {
   return Array(count).fill().map(() => ({
+    id: nanoid(MAX_ID_LENGTH),
     title: getItemTitle(titles),
     createdDate: getItemCreatedDate(),
     announce: getItemAnnounce(sentences),
