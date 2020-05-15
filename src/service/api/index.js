@@ -2,6 +2,10 @@
 
 const {Router} = require(`express`);
 
+const {
+  CategorySevice,
+} = require(`../data-service`);
+
 const {getMockData} = require(`../lib/get-mock-data`);
 
 const router = new Router();

@@ -1,8 +1,8 @@
 'use strict';
 
-// TODO: connect data services for API routes
+const CategorySevice = require(`./category`);
 
 module.exports = {
-  // TODO: export data services
+  CategorySevice,
 };
 
