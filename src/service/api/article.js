@@ -3,8 +3,17 @@
 const {Router} = require(`express`);
 
 const {HttpCode} = require(`../../constants`);
+const itemValidator = require(`../middlewares/item-validator`);
+const articleExist = require(`../middlewares/article-exist`);
 
 const router = new Router();
+
+const articleValidator = itemValidator([
+  `title`,
+  `announce`,
+  `fullText`,
+  `category`,
+]);
 
 module.exports = (parentRouter, articleDataService) => {
   parentRouter.use(`/articles`, router);
@@ -17,7 +26,7 @@ module.exports = (parentRouter, articleDataService) => {
       .json(articles);
   });
 
-  router.post(`/`, (req, res) => {
+  router.post(`/`, articleValidator, (req, res) => {
     const createdArticle = articleDataService.create(req.body);
 
     return res
@@ -25,7 +34,7 @@ module.exports = (parentRouter, articleDataService) => {
       .json(createdArticle);
   });
 
-  router.get(`/:articleId`, (req, res) => {
+  router.get(`/:articleId`, articleExist(articleDataService), (req, res) => {
     const {articleId} = req.params;
     const article = articleDataService.findOne(articleId);
 
@@ -34,7 +43,7 @@ module.exports = (parentRouter, articleDataService) => {
       .json(article);
   });
 
-  router.put(`/:articleId`, (req, res) => {
+  router.put(`/:articleId`, [articleValidator, articleExist(articleDataService)], (req, res) => {
     const {articleId} = req.params;
     const updatedArticle = articleDataService.update(articleId, req.body);
 
@@ -43,7 +52,7 @@ module.exports = (parentRouter, articleDataService) => {
       .json(updatedArticle);
   });
 
-  router.delete(`/:articleId`, (req, res) => {
+  router.delete(`/:articleId`, articleExist(articleDataService), (req, res) => {
     const {articleId} = req.params;
     const deletedArticle = articleDataService.drop(articleId);
 
