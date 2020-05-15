@@ -1,0 +1,21 @@
+### ресурс возвращает список комментариев публикации;
+GET /api/articles/AN3080/comments HTTP/1.1
+Host: localhost:3000
+
+### создаёт новый комментарий;
+POST /api/articles/AN3080/comments HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+
+{
+  "id": "test-comment",
+  "text": "Тест создания статьи"
+}
+
+### возвращает полную информацию о комментарии;
+GET /api/articles/AN3080/comments/test-comment HTTP/1.1
+Host: localhost:3000
+
+### удаляет определённый комментарий;
+DELETE /api/articles/AN3080/comments/test-comment HTTP/1.1
+Host: localhost:3000
