@@ -19,7 +19,7 @@ module.exports = (parentRouter, articleDataService) => {
   parentRouter.use(`/articles`, router);
 
   router.get(`/`, (req, res) => {
-    const articles = articleDataService.getAll();
+    const articles = articleDataService.findAll();
 
     res
       .status(HttpCode.OK)
