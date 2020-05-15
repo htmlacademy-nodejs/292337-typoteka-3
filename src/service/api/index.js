@@ -4,6 +4,7 @@ const {Router} = require(`express`);
 
 const {
   CategorySevice,
+  ArticleSevice,
 } = require(`../data-service`);
 
 const categoryAPI = require(`./category`);
