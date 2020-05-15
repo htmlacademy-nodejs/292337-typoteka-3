@@ -17,6 +17,8 @@ const HttpCode = {
 };
 const MAX_ID_LENGTH = 6;
 
+const MOCK_FILENAME = `mock.json`;
+
 module.exports = {
   DEFAULT_COUNT,
   MAX_COUNT,
@@ -25,4 +27,5 @@ module.exports = {
   ExitCode,
   HttpCode,
   MAX_ID_LENGTH,
+  MOCK_FILENAME,
 };
