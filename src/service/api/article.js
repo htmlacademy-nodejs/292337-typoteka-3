@@ -5,8 +5,7 @@ const {Router} = require(`express`);
 const {HttpCode} = require(`../../constants`);
 const itemValidator = require(`../middlewares/item-validator`);
 const articleExist = require(`../middlewares/article-exist`);
-
-const router = new Router();
+const commentExist = require(`../middlewares/comment-exist`);
 
 const articleValidator = itemValidator([
   `title`,
@@ -14,8 +13,11 @@ const articleValidator = itemValidator([
   `fullText`,
   `category`,
 ]);
+const commentValidator = itemValidator([`text`]);
 
-module.exports = (parentRouter, articleDataService) => {
+const router = new Router();
+
+module.exports = (parentRouter, articleDataService, commentDataService) => {
   parentRouter.use(`/articles`, router);
 
   router.get(`/`, (req, res) => {
@@ -35,8 +37,7 @@ module.exports = (parentRouter, articleDataService) => {
   });
 
   router.get(`/:articleId`, articleExist(articleDataService), (req, res) => {
-    const {articleId} = req.params;
-    const article = articleDataService.findOne(articleId);
+    const {article} = res.locals;
 
     return res
       .status(HttpCode.OK)
@@ -59,5 +60,40 @@ module.exports = (parentRouter, articleDataService) => {
     return res
       .status(HttpCode.OK)
       .json(deletedArticle);
+  });
+
+  router.get(`/:articleId/comments`, articleExist(articleDataService), (req, res) => {
+    const comments = commentDataService.findAll(res.locals.article);
+
+    res
+      .status(HttpCode.OK)
+      .json(comments);
+  });
+
+  router.post(`/:articleId/comments`, [commentValidator, articleExist(articleDataService)], (req, res) => {
+    const {article} = res.locals;
+    const createdComment = commentDataService.create(req.body, article);
+
+    return res
+      .status(HttpCode.CREATED)
+      .json(createdComment);
+  });
+
+  router.get(`/:articleId/comments/:commentId`, [articleExist(articleDataService), commentExist(commentDataService)], (req, res) => {
+    const {comment} = res.locals;
+
+    return res
+      .status(HttpCode.OK)
+      .json(comment);
+  });
+
+  router.delete(`/:articleId/comments/:commentId`, [articleExist(articleDataService), commentExist(commentDataService)], (req, res) => {
+    const {commentId} = req.params;
+    const {article} = res.locals;
+    const deletedComment = commentDataService.drop(commentId, article);
+
+    return res
+      .status(HttpCode.OK)
+      .json(deletedComment);
   });
 };
