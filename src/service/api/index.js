@@ -6,6 +6,8 @@ const {
   CategorySevice,
 } = require(`../data-service`);
 
+const categoryAPI = require(`./category`);
+
 const {getMockData} = require(`../lib/get-mock-data`);
 
 const router = new Router();
@@ -13,7 +15,7 @@ const router = new Router();
 (async () => {
   const mockData = await getMockData();
 
-  // TODO: add api routers
+  categoryAPI(router, new CategorySevice(mockData));
 })();
 
 module.exports = router;
