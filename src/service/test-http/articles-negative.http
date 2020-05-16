@@ -1,0 +1,50 @@
+### ресурс возвращает список публикаций;
+GET /api/articles/all HTTP/1.1
+Host: localhost:3000
+
+### создаёт новую публикацию;
+POST /api/articles HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+
+{
+  "wrong-name": "Тест создания статьи",
+  "createdDate": "2020-05-04 10:08:02",
+  "announce": "Тест создания простой статьи.",
+  "fullText": "Простая статья. Тест. Создать.",
+  "category": ["Тест"]
+}
+
+### возвращает полную информацию о публикации;
+GET /api/articles/not-existed-article HTTP/1.1
+Host: localhost:3000
+
+### редактирует определённую публикацию;
+PUT /api/articles/not-existed-article HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+
+{
+  "title": "Тест обновления статьи",
+  "createdDate": "2020-05-04 10:08:02",
+  "announce": "Тест обновления простой статьи.",
+  "fullText": "Простая статья. Тест. Обновить.",
+  "category": ["Тест", "Тест2"]
+}
+
+### редактирует определённую публикацию;
+PUT /api/articles/not-existed-article HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+
+{
+  "wrong-name": "Тест обновления статьи",
+  "createdDate": "2020-05-04 10:08:02",
+  "announce": "Тест обновления простой статьи.",
+  "fullText": "Простая статья. Тест. Обновить.",
+  "category": ["Тест", "Тест2"]
+}
+
+### удаляет определённое публикацию;
+DELETE /api/articles/not-existed-article HTTP/1.1
+Host: localhost:3000

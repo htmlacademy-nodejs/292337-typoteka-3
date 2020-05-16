@@ -1,0 +1,37 @@
+### ресурс возвращает список комментариев публикации;
+GET /api/articles/not-existed-article/comments HTTP/1.1
+Host: localhost:3000
+
+### создаёт новый комментарий;
+POST /api/articles/AN3080/comments HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+
+{
+  "wrong-name": "Тест создания статьи"
+}
+
+### создаёт новый комментарий;
+POST /api/articles/not-existed-article/comments HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+
+{
+  "wrong-name": "Тест создания статьи"
+}
+
+### возвращает полную информацию о комментарии;
+GET /api/articles/not-existed-article/comments/test-comment HTTP/1.1
+Host: localhost:3000
+
+### возвращает полную информацию о комментарии;
+GET /api/articles/AN3080/comments/not-existed-comment HTTP/1.1
+Host: localhost:3000
+
+### удаляет определённый комментарий;
+DELETE /api/articles/not-existed-article/comments/test-comment HTTP/1.1
+Host: localhost:3000
+
+### удаляет определённый комментарий;
+DELETE /api/articles/AN3080/comments/not-existed-comment HTTP/1.1
+Host: localhost:3000
