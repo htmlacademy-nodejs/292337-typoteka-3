@@ -32,7 +32,7 @@ router.use(`/`, async (req, res, next) => {
   }
 
   next();
-})();
+});
 
 categoryAPI(router, categoryService);
 articleAPI(router, articleService, commentService);
