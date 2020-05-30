@@ -2,6 +2,7 @@
 
 const express = require(`express`);
 const {getLogger} = require(`../lib/get-logger`);
+const requestLoggerMiddleware = require(`../middlewares/request-logger`);
 
 const router = require(`../api`);
 const {
@@ -15,16 +16,7 @@ const logger = getLogger();
 const app = express();
 
 app.use(express.json());
-app.use((req, res, next) => {
-  logger.debug(`Start request to url ${req.url}`);
-
-  // Light alternative to express-pino-logger
-  res.set.on(`finish`, () => {
-    logger.info(`End request with ${res.statusCode} to ${req.originalUrl}`);
-  });
-
-  next();
-});
+app.use(requestLoggerMiddleware(logger));
 app.use(API_PREFIX_PATH, router);
 
 app.use((req, res) => {
