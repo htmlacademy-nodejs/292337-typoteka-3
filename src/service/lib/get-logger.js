@@ -9,7 +9,7 @@ const logger = pino(
         colorize: false,
       },
     },
-    pino.destinatio({
+    pino.destination({
       dest: `src/service/logs/all-logs`,
       sync: false,
     }),
