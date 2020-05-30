@@ -1,6 +1,7 @@
 'use strict';
 
 const fs = require(`fs`).promises;
+const logger = require(`./get-logger`).getLogger();
 
 const {MOCK_FILENAME} = require(`../../constants`);
 
@@ -21,7 +22,7 @@ const getMockData = async () => {
     if (error.code === `ENOENT`) {
       data = [];
     } else {
-      console.error(error);
+      logger.error(error);
 
       return Promise.reject(error);
     }
