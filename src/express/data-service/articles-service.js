@@ -14,6 +14,14 @@ class ArticlesDataService {
   async findOne(articleId) {
     return await request(`${this._baseUrl}/api/articles/${articleId}/`, {json: true});
   }
+
+  async findLast(limit) {
+    const articles = await this.findAll();
+
+    return (articles.length > limit)
+      ? articles.splice(-limit)
+      : articles;
+  }
 }
 
 module.exports = ArticlesDataService;
