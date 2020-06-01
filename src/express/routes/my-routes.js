@@ -4,7 +4,25 @@ const {Router} = require(`express`);
 
 const myRouter = new Router();
 
-myRouter.get(`/`, (req, res) => res.render(`admin/my`, {userRole: `admin`}));
-myRouter.get(`/comments`, (req, res) => res.render(`admin/comments`, {userRole: `admin`}));
+module.exports = (parentRouter, articlesDataService, commentsDataService) => {
+  parentRouter.use(`/my`, myRouter);
 
-module.exports = myRouter;
+  myRouter.get(`/`, async (req, res) => {
+    const articles = await articlesDataService.findAll();
+
+    res.render(`admin/my`, {
+      userRole: `admin`,
+      articles,
+    });
+  });
+
+  myRouter.get(`/comments`, async (req, res) => {
+    const lastArticles = await articlesDataService.findLast(3);
+    const comments = await commentsDataService.findAll(lastArticles);
+
+    res.render(`admin/comments`, {
+      userRole: `admin`,
+      comments,
+    });
+  });
+};
