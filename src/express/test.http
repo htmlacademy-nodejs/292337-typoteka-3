@@ -16,8 +16,8 @@ GET http://localhost:8080/my/comments HTTP/1.1
 
 GET http://localhost:8080/articles/add HTTP/1.1
 ###
-GET http://localhost:8080/articles/1 HTTP/1.1
+GET http://localhost:8080/articles/AN3080 HTTP/1.1
 ###
-GET http://localhost:8080/articles/edit/1 HTTP/1.1
+GET http://localhost:8080/articles/edit/AN3080 HTTP/1.1
 ###
 GET http://localhost:8080/articles/category/1 HTTP/1.1
