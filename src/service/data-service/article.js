@@ -5,8 +5,16 @@ const {nanoid} = require(`nanoid`);
 const {MAX_ID_LENGTH} = require(`../../constants`);
 
 class ArticleService {
-  constructor(articles) {
-    this._articles = articles;
+  constructor() {
+    this._articles = null;
+  }
+
+  set articles(data) {
+    this._articles = data;
+  }
+
+  get articles() {
+    return this._articles;
   }
 
   findAll() {
