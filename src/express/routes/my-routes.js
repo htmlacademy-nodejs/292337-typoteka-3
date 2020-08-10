@@ -8,7 +8,9 @@ module.exports = (parentRouter, articlesDataService, commentsDataService) => {
   parentRouter.use(`/my`, myRouter);
 
   myRouter.get(`/`, async (req, res) => {
-    const articles = await articlesDataService.findAll();
+    const articles = articlesDataService.sortNewest(
+        await articlesDataService.findAll(),
+    );
 
     res.render(`admin/my`, {
       userRole: `admin`,
