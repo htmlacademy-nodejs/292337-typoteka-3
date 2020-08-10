@@ -22,6 +22,11 @@ const FILE_SENTENCES_PATH = `./data/sentences.txt`;
 const FILE_CATEGORIES_PATH = `./data/categories.txt`;
 const FILE_COMMENTS_PATH = `./data/comments.txt`;
 
+const PictureRestrict = {
+  min: 1,
+  max: 5,
+};
+
 const getItemTitle = (titles) => {
   return titles[getRandomInt(0, titles.length - 1)];
 };
@@ -41,9 +46,57 @@ const getItemFullText = (sentences) => shuffle(sentences).slice(1, getRandomInt(
 
 const getItemCategories = (categories) => shuffle(categories).slice(1, getRandomInt(2, categories.length - 1));
 
-const generateCommnents = (count, comments) => {
+const getAvatarFileName = () => {
+  const imgIndex = getRandomInt(PictureRestrict.min, PictureRestrict.max);
+
+  return `avatar-${imgIndex}.png`;
+};
+
+const generateAvatar = () => {
+  const authorNames = [
+    `Валентин`,
+    `Иннокентий`,
+    `Перец`,
+    `Лось`,
+    `Кнопень`,
+    `Сервер`,
+    `Олень`,
+  ];
+
+  const authorSurnames = [
+    `Забегайло`,
+    `Смоктуновский`,
+    `Ясный`,
+    `Таёжный`,
+    `Покопатько`,
+    `Пошатанный`,
+    `Весёлый`,
+    `Зуев`,
+    `Пряморукий`,
+    `Величавый`,
+    `Аминь`,
+  ];
+
+  return `${authorNames[getRandomInt(0, authorNames.length - 1)]} ${authorSurnames[getRandomInt(0, authorSurnames.length - 1)]}`;
+};
+
+const getCommentCreatedDate = () => {
+  const maxTimestamp = Date.now();
+  const minTimestamp = DateTime.local().minus({months: 3}).toMillis();
+
+  return DateTime
+    .fromMillis(getRandomInt(minTimestamp, maxTimestamp))
+    .toFormat(`yyyy-MM-dd, HH:mm`);
+};
+
+const generateComments = (count, comments) => {
   return Array(count).fill().map(() => ({
     id: nanoid(MAX_ID_LENGTH),
+    author: {
+      avatar: getAvatarFileName(),
+      name: generateAvatar(),
+    },
+    createdDate: getCommentCreatedDate(),
     text: shuffle(comments).slice(1, getRandomInt(2, comments.length - 1)).join(` `),
   }));
 };
@@ -56,7 +109,7 @@ const generateItems = (count, titles, categories, sentences, comments) => {
     announce: getItemAnnounce(sentences),
     fullText: getItemFullText(sentences),
     category: getItemCategories(categories),
-    comments: generateCommnents(getRandomInt(1, 3), comments),
+    comments: generateComments(getRandomInt(1, 3), comments),
   }));
 };
 
