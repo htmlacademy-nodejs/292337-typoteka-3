@@ -4,10 +4,12 @@
   "description": "Типотека",
   "main": "./src/service/service.js",
   "scripts": {
-    "test": "npm run eslint",
+    "test": "npm run eslint && npm run test::rest",
+    "test::rest": "LOG_LEVEL=debug jest --rootDir=src/service/",
     "eslint": "eslint --ext .js src/",
     "start": "node ./src/service/service.js",
-    "server": "nodemon ./src/service/service.js --server",
+    "server": "LOG_LEVEL=error nodemon ./src/service/service.js --server",
+    "server::debug": "LOG_LEVEL=debug nodemon ./src/service/service.js --server",
     "start-front-server": "nodemon ./src/express/index.js"
   },
   "repository": {
@@ -21,15 +23,20 @@
   },
   "homepage": "https://github.com/Bargamut/292337-typoteka-3#readme",
   "devDependencies": {
+    "@types/jest": "25.2.3",
     "eslint": "6.8.0",
     "eslint-config-htmlacademy": "0.5.2",
+    "jest": "26.0.1",
     "luxon": "1.23.0",
-    "nodemon": "2.0.3"
+    "nodemon": "2.0.3",
+    "pino-pretty": "4.0.0",
+    "supertest": "4.0.2"
   },
   "dependencies": {
     "chalk": "4.0.0",
     "express": "4.17.1",
     "nanoid": "3.1.7",
+    "pino": "6.3.1",
     "pug": "2.0.4",
     "request": "2.88.2",
     "request-promise-native": "1.0.8"
