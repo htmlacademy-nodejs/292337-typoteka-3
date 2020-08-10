@@ -22,6 +22,36 @@ class ArticlesDataService {
       ? articles.splice(-limit)
       : articles;
   }
+
+  sortNewest(articles, limit) {
+    const newestArticles = [...articles].sort((a, b) => {
+      if (a.createdDate > b.createdDate) {
+        return -1;
+      }
+
+      if (a.createdDate < b.createdDate) {
+        return 1;
+      }
+
+      return 0;
+    });
+
+    if (limit && newestArticles.length > limit) {
+      newestArticles.length = limit;
+    }
+
+    return newestArticles;
+  }
+
+  sortMostCommented(articles, limit) {
+    const mostCommentedArticles = [...articles].sort((a, b) => b.comments.length - a.comments.length);
+
+    if (limit && mostCommentedArticles.length > limit) {
+      mostCommentedArticles.length = limit;
+    }
+
+    return mostCommentedArticles;
+  }
 }
 
 module.exports = ArticlesDataService;
