@@ -2,6 +2,11 @@
 
 const {Router} = require(`express`);
 
+const maxItemsLimit = {
+  NEWEST: 8,
+  MOST_COMMENTED: 4,
+};
+
 const mainRouter = new Router();
 
 module.exports = (parentRouter, articlesDataService) => {
@@ -9,8 +14,18 @@ module.exports = (parentRouter, articlesDataService) => {
 
   mainRouter.get(`/`, async (req, res) => {
     const articles = await articlesDataService.findAll();
+    const newestArticles = articlesDataService.sortNewest(
+        articles,
+        maxItemsLimit.NEWEST,
+    );
+    const mostCommentedArticles = articlesDataService.sortMostCommented(
+        articles,
+        maxItemsLimit.MOST_COMMENTED,
+    );
 
-    res.render(`main`, {articles});
+    // TODO: Сделать блок "Последние комментарии"
+
+    res.render(`main`, {newestArticles, mostCommentedArticles});
   });
 
   mainRouter.get(`/register`, (req, res) => res.render(`sign-up`));
