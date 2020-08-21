@@ -7,7 +7,11 @@ const articlesRouter = new Router();
 module.exports = (parentRouter, articlesDataService) => {
   parentRouter.use(`/articles`, articlesRouter);
 
-  articlesRouter.get(`/add`, (req, res) => res.render(`admin/new-post`, {userRole: `admin`}));
+  articlesRouter.get(`/add`, (req, res) => {
+    res.render(`admin/new-post`, {
+      userRole: `admin`,
+    });
+  });
   articlesRouter.get(`/:id`, (req, res) => res.render(`post`));
   articlesRouter.get(`/edit/:id`, async (req, res) => {
     const {id: articleId} = req.params;
@@ -18,6 +22,11 @@ module.exports = (parentRouter, articlesDataService) => {
       article,
     });
   });
-
   articlesRouter.get(`/category/:id`, (req, res) => res.render(`articles-by-category`));
+
+  articlesRouter.post(`/add`, (req, res) => {
+    res.render(`admin/new-post`, {
+      userRole: `admin`,
+    });
+  });
 };

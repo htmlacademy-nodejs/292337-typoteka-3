@@ -6,16 +6,18 @@ block content
       h1.publication__title Комментарии
 
       ul.publication__list
-        each comment in comments
-          li.publication__list-item
-            .publication__header
-              img.publication__list-image(src='/img/avatar-small-2.png' width='20' height='20' alt='Аватар пользователя')
-              b.publication__list-name Александр Петров
-              time.publication__item-time(datetime='2019-03-21T20:33') 21.03.2019, 20:33
+        each article in articles
+          each comment in article.comments
+            li.publication__list-item
+              .publication__header
+                //- avatar-small-2.png
+                img.publication__list-image(src=`/img/${comment.author.avatar}` width='20' height='20' alt='Аватар пользователя')
+                b.publication__list-name #{comment.author.name}
+                time.publication__item-time(datetime=`${comment.createdDate.replace(/,\s/, `T`)}`) #{comment.createdDate}
 
-            a.publication__item-text(href='#') Главреды «Дождя», Forbes и других СМИ попросили Роскомнадзор разъяснить штрафы за ссылки на сайты.
+              a.publication__item-text(href='#') #{article.title}
 
-            p.publication__text-strong «Яндекс.Метрика» запустила бесплатный сервис для оценки эффективности баннеров и видеорекламы в реальном времени
+              p.publication__text-strong #{comment.text}
 
-            button.publication__button.button.button--close-item(type='button')
-              span.visually-hidden Закрыть строку списка
+              button.publication__button.button.button--close-item(type='button')
+                span.visually-hidden Закрыть строку списка
