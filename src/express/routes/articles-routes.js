@@ -25,6 +25,8 @@ module.exports = (parentRouter, articlesDataService) => {
   articlesRouter.get(`/category/:id`, (req, res) => res.render(`articles-by-category`));
 
   articlesRouter.post(`/add`, (req, res) => {
+    console.log(req);
+
     res.render(`admin/new-post`, {
       userRole: `admin`,
     });
