@@ -24,6 +24,11 @@ module.exports = (parentRouter, articlesDataService) => {
   });
   articlesRouter.get(`/category/:id`, (req, res) => res.render(`articles-by-category`));
 
+  /*
+    TODO: В express приложении (./express) создайте обработчик маршрута POST /articles/add. В обработчике реализуйте получение данных из формы. Полученные данные отправьте API-сервису на ресурс /api/articles методом POST.
+
+    TODO: После успешной обработки данных из формы выполните перенаправление (redirect) на страницу «Мои объявления» (/my). В случае возникновения ошибок пользователь должен вернуться на страницу /articles/add. Форма должна быть заполнена введёнными данными.
+  */
   articlesRouter.post(`/add`, (req, res) => {
     console.log(req);
 
