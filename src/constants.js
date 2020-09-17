@@ -21,6 +21,12 @@ const MAX_ID_LENGTH = 6;
 
 const MOCK_FILENAME = `mock.json`;
 
+const MAX_FILENAME_LENGTH = 6;
+const ALLOWED_FILETYPES = [
+  `image/jpeg`,
+  `image/png`,
+];
+
 module.exports = {
   DEFAULT_COUNT,
   MAX_COUNT,
@@ -30,4 +36,6 @@ module.exports = {
   HttpCode,
   MAX_ID_LENGTH,
   MOCK_FILENAME,
+  MAX_FILENAME_LENGTH,
+  ALLOWED_FILETYPES,
 };
