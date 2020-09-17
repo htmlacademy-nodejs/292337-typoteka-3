@@ -4,7 +4,7 @@ const {Router} = require(`express`);
 
 const articlesRouter = new Router();
 
-module.exports = (parentRouter, articlesDataService) => {
+module.exports = (parentRouter, articlesDataService, processDataMiddleware) => {
   parentRouter.use(`/articles`, articlesRouter);
 
   articlesRouter.get(`/add`, (req, res) => {
@@ -29,8 +29,8 @@ module.exports = (parentRouter, articlesDataService) => {
 
     TODO: После успешной обработки данных из формы выполните перенаправление (redirect) на страницу «Мои объявления» (/my). В случае возникновения ошибок пользователь должен вернуться на страницу /articles/add. Форма должна быть заполнена введёнными данными.
   */
-  articlesRouter.post(`/add`, (req, res) => {
-    console.log(req);
+  articlesRouter.post(`/add`, processDataMiddleware, (req, res) => {
+    console.log(res.locals);
 
     res.render(`admin/new-post`, {
       userRole: `admin`,
