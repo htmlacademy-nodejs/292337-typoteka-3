@@ -23,6 +23,14 @@ class ArticlesDataService {
       : articles;
   }
 
+  async create(data) {
+    return await request.post(
+        `${this._baseUrl}/api/articles/`,
+        {
+          json: data,
+        });
+  }
+
   sortNewest(articles, limit) {
     const newestArticles = [...articles].sort((a, b) => {
       if (a.createdDate > b.createdDate) {
