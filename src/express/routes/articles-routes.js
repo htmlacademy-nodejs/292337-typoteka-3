@@ -1,8 +1,8 @@
 'use strict';
 
 const {Router} = require(`express`);
-const { ALLOWED_FILETYPES } = require("../../constants");
-const adapter = require("../lib/data-adapter");
+const {ALLOWED_FILETYPES} = require(`../../constants`);
+const adapter = require(`../lib/data-adapter`);
 
 const articlesRouter = new Router();
 
@@ -27,11 +27,6 @@ module.exports = (parentRouter, articlesDataService, processDataMiddleware) => {
   });
   articlesRouter.get(`/category/:id`, (req, res) => res.render(`articles-by-category`));
 
-  /*
-    TODO: В express приложении (./express) создайте обработчик маршрута POST /articles/add. В обработчике реализуйте получение данных из формы. Полученные данные отправьте API-сервису на ресурс /api/articles методом POST.
-
-    TODO: После успешной обработки данных из формы выполните перенаправление (redirect) на страницу «Мои объявления» (/my). В случае возникновения ошибок пользователь должен вернуться на страницу /articles/add. Форма должна быть заполнена введёнными данными.
-  */
   articlesRouter.post(`/add`, processDataMiddleware, async (req, res) => {
     const {data: article} = res.locals;
 
