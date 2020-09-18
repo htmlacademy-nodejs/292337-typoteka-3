@@ -23,10 +23,10 @@ block content
                       input(type='text' name='title' placeholder='Заголовок' value=`${article.title}` required)
                   .form__field.form__field--post-image
                     label
-                      input#image-name-field(type='text' name='titleImage' value=`${article.titleImage || ``}` placeholder='Фотография' readonly)
+                      input#image-name-field(type='text' placeholder='Фотография' value=`${article.titleImage || ``}` readonly)
                     .form__image-loader.form__image-loader--publication
                       label
-                        input.visually-hidden(type='file' name='titleImageFile')
+                        input.visually-hidden(type='file' name='titleImage')
                         | Обзор
                     if article.titleImage
                       button.button.button--transparent Удалить
