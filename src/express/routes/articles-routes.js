@@ -1,6 +1,8 @@
 'use strict';
 
 const {Router} = require(`express`);
+const { ALLOWED_FILETYPES } = require("../../constants");
+const adapter = require("../lib/data-adapter");
 
 const articlesRouter = new Router();
 
@@ -10,6 +12,7 @@ module.exports = (parentRouter, articlesDataService, processDataMiddleware) => {
   articlesRouter.get(`/add`, (req, res) => {
     res.render(`admin/new-post`, {
       userRole: `admin`,
+      article: adapter({}),
     });
   });
   articlesRouter.get(`/:id`, (req, res) => res.render(`post`));
@@ -29,11 +32,20 @@ module.exports = (parentRouter, articlesDataService, processDataMiddleware) => {
 
     TODO: После успешной обработки данных из формы выполните перенаправление (redirect) на страницу «Мои объявления» (/my). В случае возникновения ошибок пользователь должен вернуться на страницу /articles/add. Форма должна быть заполнена введёнными данными.
   */
-  articlesRouter.post(`/add`, processDataMiddleware, (req, res) => {
-    console.log(res.locals);
+  articlesRouter.post(`/add`, processDataMiddleware, async (req, res) => {
+    const {data: article} = res.locals;
 
-    res.render(`admin/new-post`, {
-      userRole: `admin`,
-    });
+    try {
+      await articlesDataService.create(article);
+
+      res.redirect(`/my`);
+    } catch (error) {
+      res.render(`admin/new-post`, {
+        userRole: `admin`,
+        allowedFileTypes: ALLOWED_FILETYPES,
+        article,
+        error,
+      });
+    }
   });
 };
