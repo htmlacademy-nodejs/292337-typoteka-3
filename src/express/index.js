@@ -2,10 +2,11 @@
 
 const path = require(`path`);
 const express = require(`express`);
+// const formidableMiddleware = require(`express-formidable`);
+// fork express-formiddable based on formiddable@canary See: https://github.com/node-formidable/formidable/issues/633
+const formidableMiddleware = require(`./middlewares/express-formidable`);
 
-const mainRouter = require(`./routes/main-routes`);
-const myRouter = require(`./routes/my-routes`);
-const articlesRouter = require(`./routes/articles-routes`);
+const router = require(`./routes`);
 
 const DEFAULT_PORT = 8080;
 
@@ -22,10 +23,16 @@ app.use(
     )
 );
 
+// middleware: Обработка форм
+app.use(
+    formidableMiddleware({
+      multiples: true,
+      uploadDir: path.resolve(__dirname, `./tmp`)
+    })
+);
+
 // Роутеры
-app.use(`/`, mainRouter);
-app.use(`/my`, myRouter);
-app.use(`/articles`, articlesRouter);
+app.use(`/`, router);
 
 app.listen(DEFAULT_PORT, ()=> {
   console.log(`Сервер стартовал на http://localhost:${DEFAULT_PORT}`);

@@ -15,5 +15,5 @@ node_modules/
 build/
 
 mock.json
-src/**/logs/
+src/**/logs/*
 *.env
